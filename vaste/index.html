@@ -1,198 +1,589 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://db.onlinewebfonts.com/c/cf9209cb40da7169670815cd8c1860c9?family=Self+Modern+Regular" rel="stylesheet">
-  <style>
-    .bg-linen {
-    --tw-bg-opacity: 1;
-    background-color: rgb(239 236 227/var(--tw-bg-opacity));
-}
-.bg-lead {
-    --tw-bg-opacity: 1;
-    background-color: rgb(38 27 32/var(--tw-bg-opacity));
-}
-.font-selfmodern {
-    
-    font-family: "Self Modern Regular";
-}
-.small-text-serif {
-    
-    font-family: "Self Modern Regular";
-    line-height: 1.5625;
-}
-.hide-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-   
-  </style>
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-            spacing: {
-        '600': '60vh',
-        '700': '70vh',
-        '1000': '100vh',
-        '144': '36rem',
-      },
-          colors: {
-            clifford: '#da373d',
-          },
-          backgroundImage: {
-    'vaste': "url('/vaste.jpg')",
-    'footer-texture': "url('/img/footer-texture.png')",
-  }
-        }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://db.onlinewebfonts.com/c/cf9209cb40da7169670815cd8c1860c9?family=Self+Modern+Regular"
+      rel="stylesheet"
+    />
+    <style>
+      .bg-linen {
+        --tw-bg-opacity: 1;
+        background-color: rgb(239 236 227 / var(--tw-bg-opacity));
       }
-    }
-  </script>
-  
-</head>
-<body class=" bg-linen absolute top-0 left-0 right-0">
-  <header class="fixed top-0 left-0 right-0 z-10 bg-linen">
-    <div class="px-8 h-8 md:px-12 py-2">
-        <div  class="flex items-center h-full justify-between antialiased">
-            <div class="flex gap-2 text-xl">
-                <button class="relative w-5">
-                    <span class="absolute block h-px w-5 transform transition duration-700 bg-lead top-[40%]" :class="!navOpen ? 'bg-lead top-[40%]' : 'bg-linen top-1/2 rotate-45'">
-                    </span>
-                    <span class="absolute block h-px w-5 transform transition duration-700 bg-lead top-[60%]" :class="!navOpen ? 'bg-lead top-[60%]' : 'bg-linen top-1/2 -rotate-45'">
-                    </span>
-                </button>
-                <div class="">MENU</div>
+      .bg-lead {
+        --tw-bg-opacity: 1;
+        background-color: rgb(38 27 32 / var(--tw-bg-opacity));
+      }
+      .font-selfmodern {
+        font-family: "Self Modern Regular";
+      }
+      .small-text-serif {
+        font-family: "Self Modern Regular";
+        line-height: 1.5625;
+      }
+      .hide-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      .fancy-underline::after {
+    bottom: 0;
+    content: "";
+    display: block;
+    height: 1px;
+    left: 50%;
+    position: absolute;
+    transition: width .3s ease 0s, left .3s ease 0s;
+    width: 0;
+}
+.fancy-underline:after:hover {
+  left: 0;
+  width: 100%;
+}   
+      .my-underline::after {
+        content: '';
+        height: 1px;
+        background: white;
+        width: 0;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        left: 50%;
+        transition: width .3s ease 0s, left .3s ease 0s;
+      }
+      .my-underline:hover::after {
+        width: 100%;
+        left: 0;
+      }
+    </style>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            
+            keyframes: {
+        aIn: {
+          '0%': {height: '0',},
+          '100%': { height: "300px" },
+          
+        }
+      },
+      animation: {
+        'aIn': 'aIn 2s  ease-in forwards',
+      },
+
+            spacing: {
+              600: "60vh",
+              700: "70vh",
+              1000: "100vh",
+              144: "36rem",
+            },
+            colors: {
+              clifford: "#da373d",
+            },
+            backgroundImage: {
+              vaste: "url('/vaste.jpg')",
+              "footer-texture": "url('/img/footer-texture.png')",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-linen absolute top-0 left-0 right-0">
+    <section id="nav-bar" class="nav-bar bg-lead fixed top-0 left-0 right-0 z-10 h-[100vh] duration-700 delay-100 transition-all -translate-y-full">
+      <div class="px-[5%] h-8 md:px-12 py-2 text-white">
+        <div class="flex items-center z-10 h-full justify-between antialiased">
+          <div class="flex gap-2 text-xl">
+            <button class="relative w-5" onclick="PushNav()">
+              <span
+                class="absolute bg-white block h-px w-5 transform transition duration-700 bg-lead top-[40%]"
+                :class="!navOpen ? 'bg-lead top-[40%]' : 'bg-linen top-1/2 rotate-45'"
+              >
+              </span>
+              <span
+                class="absolute block bg-white h-px w-5 transform transition duration-700 bg-lead top-[60%]"
+                :class="!navOpen ? 'bg-lead top-[60%]' : 'bg-linen top-1/2 -rotate-45'"
+              >
+              </span>
+            </button>
+            <div class="">MENU</div>
+          </div>
+          <div class="flex gap-4 text-xl">
+            <div>
+              <svg
+                class="inline-block h-3.5 opacity-[0.9] fill-current"
+                version="1.1"
+                id="Layer_1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                x="0px"
+                y="0px"
+                viewBox="0 0 564.8 583.6"
+                style="enable-background: new 0 0 564.8 583.6"
+                xml:space="preserve"
+              >
+                <g>
+                  <path
+                    d="M141.4,354.5l10.9-0.8C359,338.8,456.5,331.9,502,328.8c35.2-2.5,62.9-32.1,62.9-67.4V68.2L131.3,67 c-0.2-1.4-0.3-2.8-0.5-4.1C126.6,27.4,96.4,0.5,60.6,0.3L0.2,0L0,38l60.4,0.3c16.7,0.1,30.8,12.6,32.8,29.2 c8.9,73.6,26.6,197.1,34.4,251c-28.3,7.1-48.4,32.5-48.4,62c0,35.3,28.7,64,64,64h413.1v-38H143.1c-14.3,0-26-11.7-26-26 C117.1,366.8,127.8,355.4,141.4,354.5z M165.4,314.7c-7.3-50.2-20-139.6-29.2-209.7l390.7,1.1v155.2c0,15.5-12.1,28.5-27.6,29.5 C406.7,297.3,230.8,310,165.4,314.7z"
+                  ></path>
+                  <path
+                    d="M201.7,469.2c-31.5,0-57.2,25.7-57.2,57.2c0,31.5,25.7,57.2,57.2,57.2c31.5,0,57.2-25.7,57.2-57.2 C258.9,494.8,233.2,469.2,201.7,469.2z M201.7,545.7c-10.6,0-19.3-8.6-19.3-19.3c0-10.6,8.6-19.3,19.3-19.3 c10.6,0,19.3,8.6,19.3,19.3C220.9,537,212.3,545.7,201.7,545.7z"
+                  ></path>
+                  <path
+                    d="M474.1,469.2c-31.5,0-57.2,25.7-57.2,57.2c0,31.5,25.7,57.2,57.2,57.2s57.2-25.7,57.2-57.2 C531.4,494.8,505.7,469.2,474.1,469.2z M474.1,545.7c-10.6,0-19.3-8.6-19.3-19.3c0-10.6,8.6-19.3,19.3-19.3s19.3,8.6,19.3,19.3 C493.4,537,484.8,545.7,474.1,545.7z"
+                  ></path>
+                </g>
+              </svg>
             </div>
-            <div class="flex gap-4 text-xl">
-                <div>
-                    <svg class="inline-block  h-3.5 opacity-[0.9] fill-current" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 564.8 583.6" style="enable-background:new 0 0 564.8 583.6;" xml:space="preserve"> <g> <path d="M141.4,354.5l10.9-0.8C359,338.8,456.5,331.9,502,328.8c35.2-2.5,62.9-32.1,62.9-67.4V68.2L131.3,67 c-0.2-1.4-0.3-2.8-0.5-4.1C126.6,27.4,96.4,0.5,60.6,0.3L0.2,0L0,38l60.4,0.3c16.7,0.1,30.8,12.6,32.8,29.2 c8.9,73.6,26.6,197.1,34.4,251c-28.3,7.1-48.4,32.5-48.4,62c0,35.3,28.7,64,64,64h413.1v-38H143.1c-14.3,0-26-11.7-26-26 C117.1,366.8,127.8,355.4,141.4,354.5z M165.4,314.7c-7.3-50.2-20-139.6-29.2-209.7l390.7,1.1v155.2c0,15.5-12.1,28.5-27.6,29.5 C406.7,297.3,230.8,310,165.4,314.7z"></path> <path d="M201.7,469.2c-31.5,0-57.2,25.7-57.2,57.2c0,31.5,25.7,57.2,57.2,57.2c31.5,0,57.2-25.7,57.2-57.2 C258.9,494.8,233.2,469.2,201.7,469.2z M201.7,545.7c-10.6,0-19.3-8.6-19.3-19.3c0-10.6,8.6-19.3,19.3-19.3 c10.6,0,19.3,8.6,19.3,19.3C220.9,537,212.3,545.7,201.7,545.7z"></path> <path d="M474.1,469.2c-31.5,0-57.2,25.7-57.2,57.2c0,31.5,25.7,57.2,57.2,57.2s57.2-25.7,57.2-57.2 C531.4,494.8,505.7,469.2,474.1,469.2z M474.1,545.7c-10.6,0-19.3-8.6-19.3-19.3c0-10.6,8.6-19.3,19.3-19.3s19.3,8.6,19.3,19.3 C493.4,537,484.8,545.7,474.1,545.7z"></path> </g> </svg>
-                </div>
-                <div class="underline underline-offset-4 pr-4">EN</div>
-                <div class="absolute right-4">FR</div>
-            </div>
-        </div>
-    </div>
-  </header>
-  <aside class="fixed bottom-0 left-0 right-0 bg-linen z-10 hover:pb-2 transition-all duration-700 lg:grid lg:grid-flow-row lg:justify-center lg:grid-cols-12 lg:place-content-end ">
-    <div class="flex items-center justify-between px-8 h-10 lg:col-start-8 lg:col-end-13 ">
-        <div class="text-sm font-bold font-selfmodern ">
-            GET IN TOUCH
-        </div>
-        <div>
-            Icon
-        </div>
-    </div>
-  </aside>
-  <main class=" top-0 right-0 left-0 bg-linen px-8 w-full">
-    <section>
-        <div class="h-600 md:h-700 lg:h-1000 transition-all duration-400 bg-[url(./vaste.jpg)] bg-bottom bg-cover bg-no-repeat relative">
-                <div class="absolute top-0 bottom-0 left-0 right-0 flex justify-center items-center">
-                    <h2 class="text-5xl md:text-6xl lg:text-3xl font-bold antialiased transition-all duration-400 tracking-widest leading-8">VASTE</h2>
-                </div>
-        </div>
-    </section>
-    <section class="py-5 md:grid grid-cols-4 lg:grid-cols-12 gap-2 grid-flow-col">
-        <div class="pb-5 col-span-2 lg:col-span-8">
-            <h1 class="text-3xl sm:text-[2rem] md:text-[2.125rem] lg:text-[3.25rem] transition-all text-start font-selfmodern font-thin antialiased  leading-snug">Furniture inspired by our land and resources, clear lines that reflect a patient and mastered gesture.</h1>
-        </div>
-        <div class="col-span-2 lg:col-span-4 md:flex flex-col justify-between lg:col-span-4">
-            <p class="pb-5 text-gray-800 text-start tracking-normal leading-6 small-text-serif ">Designed and manufactured in Montreal, the collection considers the nordicity of our environment to offer elegant, adapted and timeless pieces. Vaste is a selection of durable furniture that fits naturally in everyday life.</p>
-            <button class="w-full h-12 border border-black text-gray-950 uppercase tracking-wide text-sm hover:bg-black hover:text-white font-medium">SHOP OUR SELECTION</button>
-        </div>
-    </section>
-    <!-- slider -->
-    <section class="container mx-auto">
-      <div class="slider-wrapper">
-        <div id="prev-slide" class="slide-button">
-          <button aria-invalid aria-hidden aria-disabled class="-z-10">
-            <svg aria-invalid aria-hidden aria-disabled class="w-12 lg:w-16 group-hover:animate-bounceX" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 690.3 194" style="enable-background:new 0 0 690.3 194;" xml:space="preserve"> <g> <polygon points="580.5,12.8 655.7,87.9 0,87.9 0,106.1 655.7,106.1 580.6,181.2 593.3,194 690.3,97 593.3,0 "></polygon> </g> </svg>
-          </button>
-        </div>
-        <div class="image-list">
-          <div class="image-item w-[100vw] sm:w-[50vw] md:w-[325px] flex flex-col ">
-            <div style="background: url('chair_1.webp');background-size: cover;" class="flex-1 bg-bottom bg-cover bg-no-repeat p-6 group">
-            <button class="w-full h-12 border border-black text-gray-950 uppercase tracking-wide text-sm hover:bg-black hover:text-white font-medium opacity-0 group-hover:opacity-90 transition-all duration-700 ">SHOP OUR SELECTION</button>
+            <div class="underline underline-offset-4 pr-4">EN</div>
+            <div class="absolute right-4">FR</div>
           </div>
-          <div class="flex justify-between items-center">
-            <p class="text-lg">dune Stool</p>
-            <p class="text-sm text-slate-700">
-              upholstered or wood</p>
-          </div>
-          </div>
-          <div class="image-item w-[100vw] sm:w-[50vw] md:w-[325px] flex flex-col">
-            <div style="background: url('chair_2.webp');background-size: cover;" class="flex-1 bg-bottom bg-cover bg-no-repeat p-6 group">
-            <button class="w-full h-12 border border-black text-gray-950 uppercase tracking-wide text-sm hover:bg-black hover:text-white font-medium opacity-0 group-hover:opacity-90 transition-all duration-700 ">SHOP OUR SELECTION</button>
-          </div>
-          <div class="flex justify-between items-center">
-            <p class="text-lg">dune Stool</p>
-            <p class="text-sm text-slate-700">
-              upholstered or wood</p>
-          </div>
-          </div>
-          <div class="image-item w-[100vw] sm:w-[50vw] md:w-[325px] flex flex-col">
-            <div style="background: url('chair_3.webp'); background-size: cover;" class="flex-1 bg-bottom bg-cover bg-no-repeat p-6 group">
-            <button class="w-full h-12 border border-black text-gray-950 uppercase tracking-wide text-sm hover:bg-black hover:text-white hover:border-0 font-medium opacity-0 group-hover:opacity-90 transition-all duration-700 ">SHOP OUR SELECTION</button>
-          </div>
-            <div class="flex justify-between items-center">
-              <p class="text-lg">dune Stool</p>
-              <p class="text-sm text-slate-700">
-                upholstered or wood</p>
-            </div>
-          </div>
-          <div class="image-item w-[100vw] sm:w-[50vw] md:w-[325px] flex flex-col">
-            <div style="background: url('chair_4.webp'); background-size: cover;" class="flex-1 bg-bottom bg-cover bg-no-repeat p-6 group">
-            <button class="w-full h-12 border border-black text-gray-950 uppercase tracking-wide text-sm hover:bg-black hover:text-white hover:border-0 font-medium opacity-0 group-hover:opacity-90 transition-all duration-700 ">SHOP OUR SELECTION</button>
-          </div>
-          <div class="flex justify-between items-center">
-            <p class="text-lg">dune Stool</p>
-            <p class="text-sm text-slate-700">
-              upholstered or wood</p>
-          </div>
-          </div>
-          <div class="image-item w-[100vw] sm:w-[50vw] md:w-[325px] flex flex-col">
-            <div style="background: url('chair_5.webp'); background-size: cover;" class="flex-1 bg-bottom bg-cover bg-no-repeat p-6 group">
-            <button class="w-full h-12 border border-black text-gray-950 uppercase tracking-wide text-sm hover:bg-black hover:text-white hover:border-0 font-medium opacity-0 group-hover:opacity-90 transition-all duration-700  ">SHOP OUR SELECTION</button>
-          </div>
-          <div class="flex justify-between items-center">
-            <p class="text-lg">dune Stool</p>
-            <p class="text-sm text-slate-700">
-              upholstered or wood</p>
-          </div>
-          </div>
-          <div class="image-item w-[100vw] sm:w-[50vw] md:w-[325px] flex flex-col">
-            <div style="background: url('chair_1.webp'); background-size: cover;" class="flex-1 bg-bottom bg-cover bg-no-repeat p-6 group">
-            <button class="w-full h-12 border border-black text-gray-950 uppercase tracking-wide text-sm hover:bg-black hover:text-white hover:border-0 font-medium opacity-0 group-hover:opacity-90 transition-all duration-700 ">SHOP OUR SELECTION</button>
-          </div>
-          <div class="flex justify-between items-center">
-            <p class="text-lg">dune Stool</p>
-            <p class="text-sm text-slate-700">
-              upholstered or wood</p>
-          </div>
-          </div>
-          <div class="image-item w-[100vw] sm:w-[50vw] md:w-[325px] flex flex-col">
-            <div style="background: url('chair_3.webp'); background-size: cover;" class="flex-1 bg-bottom bg-cover bg-no-repeat p-6 group">
-            <button class="w-full h-12 border border-black text-gray-950 uppercase tracking-wide text-sm hover:bg-black hover:text-white hover:border-0 font-medium opacity-0 group-hover:opacity-90 transition-all duration-700 ">SHOP OUR SELECTION</button>
-          </div>
-          <div class="flex justify-between items-center">
-            <p class="text-lg">dune Stool</p>
-            <p class="text-sm text-slate-700">
-              upholstered or wood</p>
-          </div>
-          </div>
-        </div>
-        <div id="next-slide" class="slide-button">
-          <button  aria-invalid aria-hidden aria-disabled class="-z-10">
-            <svg class="w-12 lg:w-16 group-hover:animate-bounceX" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 690.3 194" style="enable-background:new 0 0 690.3 194;" xml:space="preserve"> <g> <polygon points="580.5,12.8 655.7,87.9 0,87.9 0,106.1 655.7,106.1 580.6,181.2 593.3,194 690.3,97 593.3,0 "></polygon> </g> </svg>
-          </button>
         </div>
       </div>
-      
+        <div class=" flex gap-10 h-full items-center  flex-col py-20 ">
+          
+          <div class="*:text-5xl *:md:text-6xl  *:text-white flex justify-center font-selfmodern items-center gap-10 flex-col">
+            <div>
+              <a href="http://" class="my-underline relative">Products</a>
+            </div>
+            <div>
+              <a href="http://" class="my-underline relative">Case Studies</a>
+            </div>
+            <div>
+              <a href="http://" class="my-underline relative">Materials</a>
+            </div>
+          </div>
+          <div class="*:text-lg *:text-white flex gap-4 justify-around font-sans flex-wrap">
+            <div>
+              <a href="http://" class="my-underline relative">About</a>
+            </div>
+            <div>
+              <a href="http://" class="my-underline relative">Terms and conditions</a>
+            </div>
+            <div>
+              <a href="http://" class="my-underline relative">Trade Accounts</a>
+            </div>
+            <div>
+              <a href="http://" class="my-underline relative">Contact Us</a>
+            </div>
+          </div>
+          <div class="text-center text-white">
+            <p class="my-underline relative">Instagram</p>
+          </div>
+        </div>
     </section>
-    <section class="h-48"></section>
-  </main>
-</body>
+    <header class="fixed top-0 z-10 left-0 right-0 bg-linen">
+      <div class="px-[5%] h-8 md:px-12 py-2">
+        <div class="flex items-center z-10 h-full justify-between antialiased">
+          <div class="flex gap-2 text-xl">
+            <button class="relative w-5" onclick="PushNav()">
+              <span
+                class="absolute block h-px w-5 transform transition duration-700 bg-lead top-[40%]"
+                :class="!navOpen ? 'bg-lead top-[40%]' : 'bg-linen top-1/2 rotate-45'"
+              >
+              </span>
+              <span
+                class="absolute block h-px w-5 transform transition duration-700 bg-lead top-[60%]"
+                :class="!navOpen ? 'bg-lead top-[60%]' : 'bg-linen top-1/2 -rotate-45'"
+              >
+              </span>
+            </button>
+            <div class="">MENU</div>
+          </div>
+          <div class="flex gap-4 text-xl">
+            <div>
+              <svg
+                class="inline-block h-3.5 opacity-[0.9] fill-current"
+                version="1.1"
+                id="Layer_1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                x="0px"
+                y="0px"
+                viewBox="0 0 564.8 583.6"
+                style="enable-background: new 0 0 564.8 583.6"
+                xml:space="preserve"
+              >
+                <g>
+                  <path
+                    d="M141.4,354.5l10.9-0.8C359,338.8,456.5,331.9,502,328.8c35.2-2.5,62.9-32.1,62.9-67.4V68.2L131.3,67 c-0.2-1.4-0.3-2.8-0.5-4.1C126.6,27.4,96.4,0.5,60.6,0.3L0.2,0L0,38l60.4,0.3c16.7,0.1,30.8,12.6,32.8,29.2 c8.9,73.6,26.6,197.1,34.4,251c-28.3,7.1-48.4,32.5-48.4,62c0,35.3,28.7,64,64,64h413.1v-38H143.1c-14.3,0-26-11.7-26-26 C117.1,366.8,127.8,355.4,141.4,354.5z M165.4,314.7c-7.3-50.2-20-139.6-29.2-209.7l390.7,1.1v155.2c0,15.5-12.1,28.5-27.6,29.5 C406.7,297.3,230.8,310,165.4,314.7z"
+                  ></path>
+                  <path
+                    d="M201.7,469.2c-31.5,0-57.2,25.7-57.2,57.2c0,31.5,25.7,57.2,57.2,57.2c31.5,0,57.2-25.7,57.2-57.2 C258.9,494.8,233.2,469.2,201.7,469.2z M201.7,545.7c-10.6,0-19.3-8.6-19.3-19.3c0-10.6,8.6-19.3,19.3-19.3 c10.6,0,19.3,8.6,19.3,19.3C220.9,537,212.3,545.7,201.7,545.7z"
+                  ></path>
+                  <path
+                    d="M474.1,469.2c-31.5,0-57.2,25.7-57.2,57.2c0,31.5,25.7,57.2,57.2,57.2s57.2-25.7,57.2-57.2 C531.4,494.8,505.7,469.2,474.1,469.2z M474.1,545.7c-10.6,0-19.3-8.6-19.3-19.3c0-10.6,8.6-19.3,19.3-19.3s19.3,8.6,19.3,19.3 C493.4,537,484.8,545.7,474.1,545.7z"
+                  ></path>
+                </g>
+              </svg>
+            </div>
+            <div class="underline underline-offset-4 pr-4">EN</div>
+            <div class="absolute right-4">FR</div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <aside
+      class="fixed bottom-0 left-0 right-0 bg-linen z-10 hover:pb-2 transition-all duration-700 lg:grid lg:grid-flow-row lg:justify-center lg:grid-cols-12 lg:place-content-end"
+    >
+      <div
+        class="flex items-center justify-between px-[5%] h-10 lg:col-start-8 lg:col-end-13"
+      >
+        <div class="text-sm font-bold font-selfmodern">GET IN TOUCH</div>
+        <div>Icon</div>
+      </div>
+    </aside>
+    <main class="top-0 right-0 left-0 bg-linen px-[5%] w-full">
+      <section>
+        <div
+          class="h-600 md:h-700 lg:h-1000 transition-all duration-400 bg-[url(./vaste.jpg)] bg-bottom bg-cover bg-no-repeat relative"
+        >
+          <div
+            class="absolute top-0 bottom-0 left-0 right-0 flex justify-center items-center"
+          >
+            <h2
+              class="text-5xl md:text-6xl lg:text-3xl font-bold antialiased transition-all duration-400 tracking-widest leading-8"
+            >
+              VASTE
+            </h2>
+          </div>
+        </div>
+      </section>
+      <section
+        class="py-5 md:grid grid-cols-4 lg:grid-cols-12 gap-2 grid-flow-col"
+      >
+        <div class="pb-5 col-span-2 lg:col-span-8">
+          <h1
+            class="text-3xl sm:text-[2rem] md:text-[2.125rem] lg:text-[3.25rem] transition-all text-start font-selfmodern font-thin antialiased leading-snug"
+          >
+            Furniture inspired by our land and resources, clear lines that
+            reflect a patient and mastered gesture.
+          </h1>
+        </div>
+        <div
+          class="col-span-2 lg:col-span-4 md:flex flex-col justify-between lg:col-span-4"
+        >
+          <p
+            class="pb-5 text-gray-800 text-start tracking-normal leading-6 small-text-serif"
+          >
+            Designed and manufactured in Montreal, the collection considers the
+            nordicity of our environment to offer elegant, adapted and timeless
+            pieces. Vaste is a selection of durable furniture that fits
+            naturally in everyday life.
+          </p>
+          <button
+            class="w-full h-12 border border-black text-gray-950 uppercase tracking-wide text-sm hover:bg-black hover:text-white font-medium"
+          >
+            SHOP OUR SELECTION
+          </button>
+        </div>
+      </section>
+      <!-- slider -->
+      <section class="container mx-auto">
+        <div class="slider-wrapper">
+          <div id="prev-slide" class="slide-button">
+            <button aria-invalid aria-hidden aria-disabled class="-z-10 h-0 overflow-visble">
+              <svg
+                aria-invalid
+                aria-hidden
+                aria-disabled
+                class="w-12 lg:w-16 group-hover:animate-bounceX"
+                version="1.1"
+                id="Layer_1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                x="0px"
+                y="0px"
+                viewBox="0 0 690.3 194"
+                style="enable-background: new 0 0 690.3 194"
+                xml:space="preserve"
+              >
+                <g>
+                  <polygon
+                    points="580.5,12.8 655.7,87.9 0,87.9 0,106.1 655.7,106.1 580.6,181.2 593.3,194 690.3,97 593.3,0 "
+                  ></polygon>
+                </g>
+              </svg>
+            </button>
+          </div>
+          <div class="image-list">
+
+            <div
+              class="image-item image-item1  relative flex flex-col "
+            >
+              <div class="w-full relative w-full  overflow-hidden group bg-bottom bg-cover bg-no-repeat group">
+                
+                <img
+                  src="chair_1.webp"
+                  alt="chair_1"
+                  srcset=""
+                  class="h-full w-full peer object-cover hover:scale-105 transition origin-bottom transform duration-400 
+                  "
+                />
+                <button
+                  class="w-[90%] peer-hover:opacity-90 top-4 left-[4%] left-0 right-0   absolute h-14 border border-black text-gray-950 uppercase tracking-wide text-lg hover:bg-black hover:text-white font-medium opacity-0 group-hover:opacity-90 transition-all duration-700"
+                >
+                  SHOP OUR SELECTION
+                </button>
+                
+              </div>
+              <div class="flex justify-between items-center">
+                <div class="text-lg">
+                  <p>dune Stool</p>
+                  <!-- <p class="font-medium">(w/ armrests)</p> -->
+                </div>
+                <p class="text-sm text-slate-700">upholstered or wood</p>
+              </div>
+            </div>
+            <div
+              class="image-item image-item1  relative flex flex-col "
+            >
+              <div class="w-full relative w-full  overflow-hidden group bg-bottom bg-cover bg-no-repeat group">
+                
+                <img
+                  src="chair_2.webp"
+                  alt="chair_1"
+                  srcset=""
+                  class="h-full w-full peer object-cover hover:scale-105 transition origin-bottom transform duration-400 
+                  "
+                />
+                <button
+                  class="w-[90%] peer-hover:opacity-90 top-4 left-[4%] left-0 right-0   absolute h-14 border border-black text-gray-950 uppercase tracking-wide text-lg hover:bg-black hover:text-white font-medium opacity-0 group-hover:opacity-90 transition-all duration-700"
+                >
+                  SHOP OUR SELECTION
+                </button>
+                
+              </div>
+              <div class="flex justify-between items-center">
+                <div class="text-lg">
+                  <p>dune Stool</p>
+                  <!-- <p class="font-medium">(w/ armrests)</p> -->
+                </div>
+                <p class="text-sm text-slate-700">upholstered or wood</p>
+              </div>
+            </div>
+            <div
+              class="image-item image-item1  relative flex flex-col "
+            >
+              <div class="w-full relative w-full  overflow-hidden group bg-bottom bg-cover bg-no-repeat group">
+                
+                <img
+                  src="chair_3.webp"
+                  alt="chair_1"
+                  srcset=""
+                  class="h-full w-full peer object-cover hover:scale-105 transition origin-bottom transform duration-400 
+                  "
+                />
+                <button
+                  class="w-[90%] peer-hover:opacity-90 top-4 left-[4%] left-0 right-0   absolute h-14 border border-black text-gray-950 uppercase tracking-wide text-lg hover:bg-black hover:text-white font-medium opacity-0 group-hover:opacity-90 transition-all duration-700"
+                >
+                  SHOP OUR SELECTION
+                </button>
+                
+              </div>
+              <div class="flex justify-between items-center">
+                <div class="text-lg">
+                  <p>dune Stool</p>
+                  <!-- <p class="font-medium">(w/ armrests)</p> -->
+                </div>
+                <p class="text-sm text-slate-700">upholstered or wood</p>
+              </div>
+            </div>
+            <div
+              class="image-item image-item1  relative flex flex-col "
+            >
+              <div class="w-full relative w-full  overflow-hidden group bg-bottom bg-cover bg-no-repeat group">
+                
+                <img
+                  src="chair_4.webp"
+                  alt="chair_1"
+                  srcset=""
+                  class="h-full w-full peer object-cover hover:scale-105 transition origin-bottom transform duration-400 
+                  "
+                />
+                <button
+                  class="w-[90%] peer-hover:opacity-90 top-4 left-[4%] left-0 right-0   absolute h-14 border border-black text-gray-950 uppercase tracking-wide text-lg hover:bg-black hover:text-white font-medium opacity-0 group-hover:opacity-90 transition-all duration-700"
+                >
+                  SHOP OUR SELECTION
+                </button>
+                
+              </div>
+              <div class="flex justify-between items-center">
+                <div class="text-lg">
+                  <p>dune Stool</p>
+                  <!-- <p class="font-medium">(w/ armrests)</p> -->
+                </div>
+                <p class="text-sm text-slate-700">upholstered or wood</p>
+              </div>
+            </div>
+            <div
+              class="image-item image-item1  relative flex flex-col "
+            >
+              <div class="w-full relative w-full  overflow-hidden group bg-bottom bg-cover bg-no-repeat group">
+                
+                <img
+                  src="chair_5.webp"
+                  alt="chair_1"
+                  srcset=""
+                  class="h-full w-full peer object-cover hover:scale-105 transition origin-bottom transform duration-400 
+                  "
+                />
+                <button
+                  class="w-[90%] peer-hover:opacity-90 top-4 left-[4%] left-0 right-0   absolute h-14 border border-black text-gray-950 uppercase tracking-wide text-lg hover:bg-black hover:text-white font-medium opacity-0 group-hover:opacity-90 transition-all duration-700"
+                >
+                  SHOP OUR SELECTION
+                </button>
+                
+              </div>
+              <div class="flex justify-between items-center">
+                <div class="text-lg">
+                  <p>dune Stool</p>
+                  <!-- <p class="font-medium">(w/ armrests)</p> -->
+                </div>
+                <p class="text-sm text-slate-700">upholstered or wood</p>
+              </div>
+            </div>
+            <div
+              class="image-item image-item1  relative flex flex-col "
+            >
+              <div class="w-full relative w-full  overflow-hidden group bg-bottom bg-cover bg-no-repeat group">
+                
+                <img
+                  src="chair_3.webp"
+                  alt="chair_1"
+                  srcset=""
+                  class="h-full w-full peer object-cover hover:scale-105 transition origin-bottom transform duration-400 
+                  "
+                />
+                <button
+                  class="w-[90%] peer-hover:opacity-90 top-4 left-[4%] left-0 right-0   absolute h-14 border border-black text-gray-950 uppercase tracking-wide text-lg hover:bg-black hover:text-white font-medium opacity-0 group-hover:opacity-90 transition-all duration-700"
+                >
+                  SHOP OUR SELECTION
+                </button>
+                
+              </div>
+              <div class="flex justify-between items-center">
+                <div class="text-lg">
+                  <p>dune Stool</p>
+                  <!-- <p class="font-medium">(w/ armrests)</p> -->
+                </div>
+                <p class="text-sm text-slate-700">upholstered or wood</p>
+              </div>
+            </div>
+
+            
+            
+          
+            
+           
+            
+          </div>
+          <div id="next-slide" class="slide-button">
+            <button aria-invalid aria-hidden aria-disabled class="-z-10 h-0 overflow-visble">
+              <svg
+                class="w-12 lg:w-16 group-hover:animate-bounceX"
+                version="1.1"
+                id="Layer_1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                x="0px"
+                y="0px"
+                viewBox="0 0 690.3 194"
+                style="enable-background: new 0 0 690.3 194"
+                xml:space="preserve"
+              >
+                <g>
+                  <polygon
+                    points="580.5,12.8 655.7,87.9 0,87.9 0,106.1 655.7,106.1 580.6,181.2 593.3,194 690.3,97 593.3,0 "
+                  ></polygon>
+                </g>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+      <section class="discover my-10 ">
+          <div class="font-selfmodern">
+            <h3 class="font-medium text-3xl ">Discover
+              </h3>
+              <h3 class="font-medium text-3xl">
+                our collections</h3>
+          </div>
+          <div>
+            <!--  -->
+            <div>
+              <div>
+                <div class="w-full peer pt-4 grid grid-cols-6 gap-x-6 ">
+                  <div class="grid-cols-1 group col-span-1 font-selfmodern lg:col-span-2 xl:col-span-3 md:grid-cols-2 text-5xl">
+                    <div class="group-hover:hidden">+</div>
+                    <div class="hidden group-hover:block relative w-4 h-full">   
+                      <span class="absolute block h-px w-5 transform transition-all duration-700 bg-lead top-[40%]"></span>
+                      <span class="absolute block h-px w-5 transform transition-all duration-700 bg-lead top-1/2" :class="!expanded ? 'top-[60%]' : 'top-1/2'"></span>
+                  </div>
+                  </div>
+                  <div class="col-span-5 ">
+                    <div class="flex items-center h-full justify-between col-span-5 items-center">
+                      <p class="text-2xl font-medium ">Dune</p>
+                      <p class="lowercase">chair bench stool</p>
+                    </div>
+                    
+                  </div>
+                  
+                </div>
+              <div class="w-full h-0 peer-hover:animate-aIn overflow-hidden pt-4 grid grid-cols-6 gap-x-6 ">
+                  <div class="col-end-7 col-span-5 md:grid grid-cols-3 grid-rows-3 gap-x-6 font-selfmodern">
+                    <div class="md:flex flex-col justify-between">
+                      <p class="font-selfmodern text-base">A natural elegance carefully refined like sweeping sand dunes sculpted in the wind.</p>
+                      <p class="md:block hidden">EXPLORE</p>
+                    </div>
+                    <div class="col-end-4 col-span-2">
+                      <img src="dune1.webp" alt="w-full h-auto">
+                    </div>
+                    <div class="md:hidden">
+                      <a href="http://" target="_blank" rel="noopener noreferrer" class="uppercase">EXPLORE</a>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <!--  -->
+            <div>
+              <div>
+                <div class="w-full peer pt-4 grid grid-cols-6 gap-x-6 ">
+                  <div class="grid-cols-1 col-span-1 font-selfmodern lg:col-span-2 xl:col-span-3 md:grid-cols-2 text-5xl">
+                    +
+                  </div>
+                  <div class="col-span-5 ">
+                    <div class="flex items-center h-full justify-between col-span-5 items-center">
+                      <p class="text-2xl font-medium ">Dune</p>
+                      <p class="lowercase">chair bench stool</p>
+                    </div>
+                    
+                  </div>
+                  
+                </div>
+              <div class="w-full h-0 peer-hover:animate-aIn transition duration-400   overflow-hidden pt-4 grid grid-cols-6 gap-x-6 ">
+                  <div class="col-end-7 col-span-5 md:grid grid-cols-3 grid-rows-3 gap-x-6 font-selfmodern">
+                    <div class="md:flex flex-col justify-between">
+                      <p class="font-selfmodern text-base">A natural elegance carefully refined like sweeping sand dunes sculpted in the wind.</p>
+                      <p class="md:block hidden">EXPLORE</p>
+                    </div>
+                    <div class="col-end-4 col-span-2">
+                      <img src="dune1.webp" alt="w-full h-auto">
+                    </div>
+                    <div class="md:hidden">
+                      <a href="http://" target="_blank" rel="noopener noreferrer" class="uppercase">EXPLORE</a>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+          </div>
+      </section>
+    </main>
+  </body>
 </html>

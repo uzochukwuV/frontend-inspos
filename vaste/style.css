@@ -7,6 +7,7 @@
     scrollbar-width: none;
     scroll-behavior: smooth;
     gap: 14px;
+    position: relative;
 
 
 }
@@ -17,19 +18,41 @@
 
 
 .slider-wrapper .image-list .image-item {
-    width: 300px;
-    height: 400px;
+    width: 87vw;
+    height: auto;
     
     object-fit: cover;
     
 
 }
 
+@media screen and (min-width: 650px) {
+    .slider-wrapper .image-list .image-item{
+        width: 44vw;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .slider-wrapper .image-list .image-item{
+        width: 350px;
+    }
+}
 .container {
     width: 100%;
 }
 .slider-wrapper {
     position: relative;
+}
+
+.animate-in {
+    height: auto;
+    animation: animateIn 2s forwards;
+}
+
+@keyframes animateIn {
+    100% {
+        height: auto;
+    }
 }
 
 .slider-wrapper .slide-button {
